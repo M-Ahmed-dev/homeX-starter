@@ -4,9 +4,9 @@ import { useState } from 'react';
 
 import Link from 'next/link';
 
-import { Building2, Menu, X } from 'lucide-react';
-
 import { Button } from '@/registry/new-york-v4/ui/button';
+
+import { Building2, Menu, X } from 'lucide-react';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -14,17 +14,17 @@ const Navbar = () => {
     const navLinks = [
         { href: '/', label: 'Home' },
         { href: '#services', label: 'Services' },
-        { href: '/properties', label: 'Properties' },
+        { href: '#', label: 'Properties' },
         { href: '#contact', label: 'Contact' }
     ];
 
     return (
-        <nav className='fixed top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md'>
+        <nav className='border-border/40 bg-background/80 fixed top-0 z-50 w-full border-b backdrop-blur-md'>
             <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
                 <div className='flex h-16 items-center justify-between'>
                     {/* Logo */}
                     <Link href='/' className='flex items-center gap-2'>
-                        <Building2 className='h-8 w-8 text-primary' />
+                        <Building2 className='text-primary h-8 w-8' />
                         <span className='text-xl font-bold tracking-tight'>HomeX</span>
                     </Link>
 
@@ -34,7 +34,7 @@ const Navbar = () => {
                             <Link
                                 key={link.href}
                                 href={link.href}
-                                className='text-sm font-medium text-muted-foreground transition-colors hover:text-foreground'>
+                                className='text-muted-foreground hover:text-foreground text-sm font-medium transition-colors'>
                                 {link.label}
                             </Link>
                         ))}
@@ -57,7 +57,7 @@ const Navbar = () => {
                                 <Link
                                     key={link.href}
                                     href={link.href}
-                                    className='text-sm font-medium text-muted-foreground transition-colors hover:text-foreground'
+                                    className='text-muted-foreground hover:text-foreground text-sm font-medium transition-colors'
                                     onClick={() => setIsOpen(false)}>
                                     {link.label}
                                 </Link>

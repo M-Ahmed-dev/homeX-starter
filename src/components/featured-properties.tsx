@@ -24,7 +24,7 @@ const FeaturedProperties = () => {
                         </p>
                     </div>
                     <Button asChild variant='outline' size='lg'>
-                        <Link href='/properties'>
+                        <Link href='#'>
                             View All Properties
                             <ArrowRight className='ml-2 h-5 w-5' />
                         </Link>

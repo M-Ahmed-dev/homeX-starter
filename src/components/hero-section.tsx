@@ -1,9 +1,9 @@
 import Link from 'next/link';
 
-import { ArrowRight, MapPin, Search } from 'lucide-react';
-
 import { Button } from '@/registry/new-york-v4/ui/button';
 import { Input } from '@/registry/new-york-v4/ui/input';
+
+import { ArrowRight, MapPin, Search } from 'lucide-react';
 
 const HeroSection = () => {
     return (
@@ -49,7 +49,7 @@ const HeroSection = () => {
                 <div className='mb-10 w-full max-w-2xl'>
                     <div className='flex flex-col gap-3 rounded-2xl bg-white/10 p-3 backdrop-blur-md sm:flex-row'>
                         <div className='relative flex-1'>
-                            <MapPin className='absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400' />
+                            <MapPin className='absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 text-slate-400' />
                             <Input
                                 type='text'
                                 placeholder='Enter location, city, or neighborhood...'
@@ -70,7 +70,7 @@ const HeroSection = () => {
                         size='lg'
                         className='bg-white text-slate-900 hover:bg-slate-100'
                         variant='secondary'>
-                        <Link href='/properties'>
+                        <Link href='#'>
                             Browse Properties
                             <ArrowRight className='ml-2 h-5 w-5' />
                         </Link>
@@ -101,7 +101,7 @@ const HeroSection = () => {
             </div>
 
             {/* Bottom Gradient */}
-            <div className='absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent' />
+            <div className='from-background absolute right-0 bottom-0 left-0 h-32 bg-gradient-to-t to-transparent' />
         </section>
     );
 };

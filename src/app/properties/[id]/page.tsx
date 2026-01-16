@@ -2,6 +2,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
+import Footer from '@/components/footer';
+import { formatPrice, getPropertyById, properties } from '@/lib/properties';
+import { Badge } from '@/registry/new-york-v4/ui/badge';
+import { Button } from '@/registry/new-york-v4/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/registry/new-york-v4/ui/card';
+import { Input } from '@/registry/new-york-v4/ui/input';
+import { Textarea } from '@/registry/new-york-v4/ui/textarea';
+
 import {
     ArrowLeft,
     Bath,
@@ -15,14 +23,6 @@ import {
     Phone,
     Share2
 } from 'lucide-react';
-
-import Footer from '@/components/footer';
-import { formatPrice, getPropertyById, properties } from '@/lib/properties';
-import { Badge } from '@/registry/new-york-v4/ui/badge';
-import { Button } from '@/registry/new-york-v4/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/registry/new-york-v4/ui/card';
-import { Input } from '@/registry/new-york-v4/ui/input';
-import { Textarea } from '@/registry/new-york-v4/ui/textarea';
 
 export async function generateStaticParams() {
     return properties.map((property) => ({
@@ -45,14 +45,14 @@ const PropertyDetailPage = async ({ params }: PropertyDetailPageProps) => {
     return (
         <main className='min-h-screen pt-16'>
             {/* Breadcrumb */}
-            <div className='border-b bg-muted/30'>
+            <div className='bg-muted/30 border-b'>
                 <div className='mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8'>
                     <div className='flex items-center gap-2 text-sm'>
                         <Link href='/' className='text-muted-foreground hover:text-foreground'>
                             Home
                         </Link>
                         <span className='text-muted-foreground'>/</span>
-                        <Link href='/properties' className='text-muted-foreground hover:text-foreground'>
+                        <Link href='#' className='text-muted-foreground hover:text-foreground'>
                             Properties
                         </Link>
                         <span className='text-muted-foreground'>/</span>
@@ -80,13 +80,13 @@ const PropertyDetailPage = async ({ params }: PropertyDetailPageProps) => {
                                 </Badge>
                             </div>
                             <h1 className='mb-2 text-2xl font-bold sm:text-3xl'>{property.title}</h1>
-                            <div className='flex items-center gap-2 text-muted-foreground'>
+                            <div className='text-muted-foreground flex items-center gap-2'>
                                 <MapPin className='h-4 w-4' />
                                 <span>{property.address}</span>
                             </div>
                         </div>
                         <div className='text-left sm:text-right'>
-                            <div className='text-3xl font-bold text-primary'>
+                            <div className='text-primary text-3xl font-bold'>
                                 {formatPrice(property.price, property.type)}
                             </div>
                             <div className='mt-2 flex gap-2'>
@@ -109,19 +109,11 @@ const PropertyDetailPage = async ({ params }: PropertyDetailPageProps) => {
                 <div className='mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8'>
                     <div className='grid gap-4 md:grid-cols-2'>
                         <div className='relative aspect-[4/3] overflow-hidden rounded-xl'>
-                            <Image
-                                src={property.image}
-                                alt={property.title}
-                                fill
-                                className='object-cover'
-                                priority
-                            />
+                            <Image src={property.image} alt={property.title} fill className='object-cover' priority />
                         </div>
                         <div className='grid grid-cols-2 gap-4'>
                             {[1, 2, 3, 4].map((i) => (
-                                <div
-                                    key={i}
-                                    className='relative aspect-[4/3] overflow-hidden rounded-xl bg-muted'>
+                                <div key={i} className='bg-muted relative aspect-[4/3] overflow-hidden rounded-xl'>
                                     <Image
                                         src={property.image}
                                         alt={`${property.title} view ${i}`}
@@ -150,39 +142,39 @@ const PropertyDetailPage = async ({ params }: PropertyDetailPageProps) => {
                             <Card>
                                 <CardContent className='grid grid-cols-2 gap-6 p-6 sm:grid-cols-4'>
                                     <div className='flex items-center gap-3'>
-                                        <div className='flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10'>
-                                            <BedDouble className='h-6 w-6 text-primary' />
+                                        <div className='bg-primary/10 flex h-12 w-12 items-center justify-center rounded-lg'>
+                                            <BedDouble className='text-primary h-6 w-6' />
                                         </div>
                                         <div>
                                             <div className='text-2xl font-bold'>{property.bedrooms}</div>
-                                            <div className='text-sm text-muted-foreground'>Bedrooms</div>
+                                            <div className='text-muted-foreground text-sm'>Bedrooms</div>
                                         </div>
                                     </div>
                                     <div className='flex items-center gap-3'>
-                                        <div className='flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10'>
-                                            <Bath className='h-6 w-6 text-primary' />
+                                        <div className='bg-primary/10 flex h-12 w-12 items-center justify-center rounded-lg'>
+                                            <Bath className='text-primary h-6 w-6' />
                                         </div>
                                         <div>
                                             <div className='text-2xl font-bold'>{property.bathrooms}</div>
-                                            <div className='text-sm text-muted-foreground'>Bathrooms</div>
+                                            <div className='text-muted-foreground text-sm'>Bathrooms</div>
                                         </div>
                                     </div>
                                     <div className='flex items-center gap-3'>
-                                        <div className='flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10'>
-                                            <Maximize className='h-6 w-6 text-primary' />
+                                        <div className='bg-primary/10 flex h-12 w-12 items-center justify-center rounded-lg'>
+                                            <Maximize className='text-primary h-6 w-6' />
                                         </div>
                                         <div>
                                             <div className='text-2xl font-bold'>{property.area.toLocaleString()}</div>
-                                            <div className='text-sm text-muted-foreground'>Sq Ft</div>
+                                            <div className='text-muted-foreground text-sm'>Sq Ft</div>
                                         </div>
                                     </div>
                                     <div className='flex items-center gap-3'>
-                                        <div className='flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10'>
-                                            <Calendar className='h-6 w-6 text-primary' />
+                                        <div className='bg-primary/10 flex h-12 w-12 items-center justify-center rounded-lg'>
+                                            <Calendar className='text-primary h-6 w-6' />
                                         </div>
                                         <div>
                                             <div className='text-2xl font-bold'>{property.yearBuilt}</div>
-                                            <div className='text-sm text-muted-foreground'>Year Built</div>
+                                            <div className='text-muted-foreground text-sm'>Year Built</div>
                                         </div>
                                     </div>
                                 </CardContent>
@@ -194,8 +186,8 @@ const PropertyDetailPage = async ({ params }: PropertyDetailPageProps) => {
                                     <CardTitle>About This Property</CardTitle>
                                 </CardHeader>
                                 <CardContent>
-                                    <p className='leading-relaxed text-muted-foreground'>{property.description}</p>
-                                    <p className='mt-4 leading-relaxed text-muted-foreground'>
+                                    <p className='text-muted-foreground leading-relaxed'>{property.description}</p>
+                                    <p className='text-muted-foreground mt-4 leading-relaxed'>
                                         This exceptional property offers the perfect blend of luxury and comfort.
                                         Located in one of the most sought-after neighborhoods, it provides easy access
                                         to top-rated schools, shopping centers, and entertainment venues. The
@@ -229,14 +221,14 @@ const PropertyDetailPage = async ({ params }: PropertyDetailPageProps) => {
                                     <CardDescription>{property.address}</CardDescription>
                                 </CardHeader>
                                 <CardContent>
-                                    <div className='relative aspect-video overflow-hidden rounded-lg bg-muted'>
+                                    <div className='bg-muted relative aspect-video overflow-hidden rounded-lg'>
                                         <div className='absolute inset-0 flex items-center justify-center bg-gradient-to-br from-slate-200 to-slate-300 dark:from-slate-800 dark:to-slate-900'>
                                             <div className='text-center'>
-                                                <MapPin className='mx-auto mb-2 h-12 w-12 text-muted-foreground/50' />
-                                                <p className='text-sm font-medium text-muted-foreground'>
+                                                <MapPin className='text-muted-foreground/50 mx-auto mb-2 h-12 w-12' />
+                                                <p className='text-muted-foreground text-sm font-medium'>
                                                     Interactive Map
                                                 </p>
-                                                <p className='mt-1 text-xs text-muted-foreground/70'>
+                                                <p className='text-muted-foreground/70 mt-1 text-xs'>
                                                     {property.location}
                                                 </p>
                                             </div>
@@ -302,10 +294,8 @@ const PropertyDetailPage = async ({ params }: PropertyDetailPageProps) => {
                     {/* Back Button */}
                     <div className='mt-12'>
                         <Button asChild variant='outline'>
-                            <Link href='/properties'>
-                                <ArrowLeft className='mr-2 h-4 w-4' />
-                                Back to Properties
-                            </Link>
+                            <ArrowLeft className='mr-2 h-4 w-4' />
+                            Back to Properties
                         </Button>
                     </div>
                 </div>
