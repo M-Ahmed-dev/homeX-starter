@@ -7,12 +7,21 @@ import { Input } from '@/registry/new-york-v4/ui/input';
 
 const HeroSection = () => {
     return (
-        <section className='relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900'>
-            {/* Background Pattern */}
-            <div className='absolute inset-0 bg-[url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239C92AC" fill-opacity="0.05"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")] opacity-50' />
+        <section className='relative min-h-screen overflow-hidden'>
+            {/* Background Image */}
+            <div
+                className='absolute inset-0 bg-cover bg-center bg-no-repeat'
+                style={{
+                    backgroundImage:
+                        'url("https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop")'
+                }}
+            />
+
+            {/* Dark Overlay for better text readability */}
+            <div className='absolute inset-0 bg-slate-900/60' />
 
             {/* Gradient Overlay */}
-            <div className='absolute inset-0 bg-gradient-to-t from-slate-900/90 via-transparent to-slate-900/50' />
+            <div className='absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-slate-900/70' />
 
             {/* Content */}
             <div className='relative mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-center px-4 pt-16 text-center sm:px-6 lg:px-8'>

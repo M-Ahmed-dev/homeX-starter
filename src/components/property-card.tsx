@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { Bath, BedDouble, Heart, MapPin, Maximize } from 'lucide-react';
-
-import { formatPrice, type Property } from '@/lib/properties';
+import { type Property, formatPrice } from '@/lib/properties';
 import { Badge } from '@/registry/new-york-v4/ui/badge';
 import { Button } from '@/registry/new-york-v4/ui/button';
 import { Card, CardContent, CardFooter } from '@/registry/new-york-v4/ui/card';
+
+import { Bath, BedDouble, Heart, MapPin, Maximize } from 'lucide-react';
 
 interface PropertyCardProps {
     property: Property;
@@ -14,7 +14,7 @@ interface PropertyCardProps {
 
 const PropertyCard = ({ property }: PropertyCardProps) => {
     return (
-        <Card className='group overflow-hidden border-border/50 py-0 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl'>
+        <Card className='group border-border/50 overflow-hidden py-0 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl'>
             {/* Image Container */}
             <div className='relative aspect-[4/3] overflow-hidden'>
                 <Image
@@ -28,7 +28,7 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
                 <div className='absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100' />
 
                 {/* Badges */}
-                <div className='absolute left-3 top-3 flex gap-2'>
+                <div className='absolute top-3 left-3 flex gap-2'>
                     <Badge
                         className={
                             property.type === 'sale'
@@ -43,7 +43,7 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
                 </div>
 
                 {/* Favorite Button */}
-                <button className='absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-muted-foreground shadow-md transition-all hover:bg-white hover:text-red-500'>
+                <button className='text-muted-foreground absolute top-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 shadow-md transition-all hover:bg-white hover:text-red-500'>
                     <Heart className='h-5 w-5' />
                 </button>
 
@@ -58,36 +58,36 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
             {/* Content */}
             <CardContent className='space-y-3 p-4'>
                 {/* Property Type */}
-                <div className='text-xs font-medium uppercase tracking-wider text-muted-foreground'>
+                <div className='text-muted-foreground text-xs font-medium tracking-wider uppercase'>
                     {property.propertyType}
                 </div>
 
                 {/* Title */}
-                <h3 className='line-clamp-1 text-lg font-semibold transition-colors group-hover:text-primary'>
+                <h3 className='group-hover:text-primary line-clamp-1 text-lg font-semibold transition-colors'>
                     {property.title}
                 </h3>
 
                 {/* Location */}
-                <div className='flex items-center gap-1.5 text-sm text-muted-foreground'>
+                <div className='text-muted-foreground flex items-center gap-1.5 text-sm'>
                     <MapPin className='h-4 w-4' />
                     <span className='line-clamp-1'>{property.location}</span>
                 </div>
 
                 {/* Features */}
                 <div className='flex items-center gap-4 border-t pt-3'>
-                    <div className='flex items-center gap-1.5 text-sm text-muted-foreground'>
+                    <div className='text-muted-foreground flex items-center gap-1.5 text-sm'>
                         <BedDouble className='h-4 w-4' />
                         <span>
                             {property.bedrooms} {property.bedrooms === 1 ? 'Bed' : 'Beds'}
                         </span>
                     </div>
-                    <div className='flex items-center gap-1.5 text-sm text-muted-foreground'>
+                    <div className='text-muted-foreground flex items-center gap-1.5 text-sm'>
                         <Bath className='h-4 w-4' />
                         <span>
                             {property.bathrooms} {property.bathrooms === 1 ? 'Bath' : 'Baths'}
                         </span>
                     </div>
-                    <div className='flex items-center gap-1.5 text-sm text-muted-foreground'>
+                    <div className='text-muted-foreground flex items-center gap-1.5 text-sm'>
                         <Maximize className='h-4 w-4' />
                         <span>{property.area.toLocaleString()} sqft</span>
                     </div>
@@ -95,9 +95,13 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
             </CardContent>
 
             {/* Footer */}
-            <CardFooter className='border-t bg-muted/30 p-4'>
+            <CardFooter className='bg-muted/30 border-t p-4'>
                 <Button asChild className='w-full'>
-                    <Link href={`/properties/${property.id}`}>View Details</Link>
+                    <Link
+                        // href={`/properties/${property.id}`}
+                        href='#'>
+                        View Details
+                    </Link>
                 </Button>
             </CardFooter>
         </Card>

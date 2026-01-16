@@ -1,10 +1,10 @@
-import { Building2, Home, Hotel, Search } from 'lucide-react';
-
 import Footer from '@/components/footer';
 import PropertyCard from '@/components/property-card';
 import { properties } from '@/lib/properties';
 import { Button } from '@/registry/new-york-v4/ui/button';
 import { Input } from '@/registry/new-york-v4/ui/input';
+
+import { Building2, Home, Hotel, Search } from 'lucide-react';
 
 const propertyTypes = [
     { label: 'All', value: 'all', icon: Building2 },
@@ -28,12 +28,12 @@ const PropertiesPage = () => {
             </section>
 
             {/* Filters Section */}
-            <section className='border-b bg-background py-6'>
+            <section className='bg-background border-b py-6'>
                 <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
                     <div className='flex flex-col gap-4 md:flex-row md:items-center md:justify-between'>
                         {/* Search */}
                         <div className='relative max-w-md flex-1'>
-                            <Search className='absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground' />
+                            <Search className='text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2' />
                             <Input placeholder='Search by location, property name...' className='pl-10' />
                         </div>
 
@@ -70,7 +70,7 @@ const PropertiesPage = () => {
                     {/* Results Count */}
                     <div className='mb-8'>
                         <p className='text-muted-foreground'>
-                            Showing <span className='font-semibold text-foreground'>{properties.length}</span>{' '}
+                            Showing <span className='text-foreground font-semibold'>{properties.length}</span>{' '}
                             properties
                         </p>
                     </div>
