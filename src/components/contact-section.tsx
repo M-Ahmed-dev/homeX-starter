@@ -1,9 +1,9 @@
-import { Clock, Mail, MapPin, Phone } from 'lucide-react';
-
 import { Button } from '@/registry/new-york-v4/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/registry/new-york-v4/ui/card';
 import { Input } from '@/registry/new-york-v4/ui/input';
 import { Textarea } from '@/registry/new-york-v4/ui/textarea';
+
+import { Clock, Mail, MapPin, Phone } from 'lucide-react';
 
 const contactInfo = [
     {
@@ -19,7 +19,7 @@ const contactInfo = [
     {
         icon: Mail,
         title: 'Email Us',
-        details: ['info@luxeestates.com', 'sales@luxeestates.com']
+        details: ['info@homex.com', 'sales@homex.com']
     },
     {
         icon: Clock,
@@ -34,11 +34,11 @@ const ContactSection = () => {
             <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
                 {/* Section Header */}
                 <div className='mx-auto mb-16 max-w-2xl text-center'>
-                    <span className='mb-4 inline-block rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary'>
+                    <span className='bg-primary/10 text-primary mb-4 inline-block rounded-full px-4 py-1.5 text-sm font-medium'>
                         Get in Touch
                     </span>
                     <h2 className='mb-4 text-3xl font-bold tracking-tight sm:text-4xl'>Contact Us</h2>
-                    <p className='text-lg text-muted-foreground'>
+                    <p className='text-muted-foreground text-lg'>
                         Ready to find your dream home? Get in touch with our expert team and let us help you make it a
                         reality.
                     </p>
@@ -117,13 +117,13 @@ const ContactSection = () => {
                             {contactInfo.map((info) => (
                                 <Card key={info.title} className='border-border/50 bg-card/50'>
                                     <CardContent className='flex items-start gap-4 p-4'>
-                                        <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10'>
-                                            <info.icon className='h-5 w-5 text-primary' />
+                                        <div className='bg-primary/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg'>
+                                            <info.icon className='text-primary h-5 w-5' />
                                         </div>
                                         <div>
                                             <h3 className='font-semibold'>{info.title}</h3>
                                             {info.details.map((detail) => (
-                                                <p key={detail} className='text-sm text-muted-foreground'>
+                                                <p key={detail} className='text-muted-foreground text-sm'>
                                                     {detail}
                                                 </p>
                                             ))}
@@ -134,15 +134,15 @@ const ContactSection = () => {
                         </div>
 
                         {/* Map Placeholder */}
-                        <Card className='overflow-hidden border-border/50'>
-                            <div className='relative aspect-video bg-muted'>
+                        <Card className='border-border/50 overflow-hidden'>
+                            <div className='bg-muted relative aspect-video'>
                                 <div className='absolute inset-0 flex items-center justify-center bg-gradient-to-br from-slate-200 to-slate-300 dark:from-slate-800 dark:to-slate-900'>
                                     <div className='text-center'>
-                                        <MapPin className='mx-auto mb-2 h-12 w-12 text-muted-foreground/50' />
-                                        <p className='text-sm font-medium text-muted-foreground'>
+                                        <MapPin className='text-muted-foreground/50 mx-auto mb-2 h-12 w-12' />
+                                        <p className='text-muted-foreground text-sm font-medium'>
                                             Interactive Map Coming Soon
                                         </p>
-                                        <p className='mt-1 text-xs text-muted-foreground/70'>
+                                        <p className='text-muted-foreground/70 mt-1 text-xs'>
                                             123 Luxury Lane, New York, NY
                                         </p>
                                     </div>

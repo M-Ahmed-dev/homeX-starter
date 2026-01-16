@@ -5,8 +5,8 @@ import localFont from 'next/font/local';
 
 import { ThemeProvider } from 'next-themes';
 
-import Navbar from '@/components/navbar';
 import '@/app/globals.css';
+import Navbar from '@/components/navbar';
 import { Toaster } from '@/registry/new-york-v4/ui/sonner';
 
 const geistSans = localFont({
@@ -21,9 +21,9 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-    title: 'LuxeEstates - Premium Real Estate',
+    title: 'HomeX - Premium Real Estate',
     description:
-        'Find your dream home with LuxeEstates. Browse luxury properties, apartments, villas, and more in prime locations.'
+        'Find your dream home with HomeX. Browse luxury properties, apartments, villas, and more in prime locations.'
 };
 
 const Layout = ({ children }: Readonly<{ children: ReactNode }>) => {

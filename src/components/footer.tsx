@@ -1,9 +1,9 @@
 import Link from 'next/link';
 
-import { Building2, Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
-
 import { Button } from '@/registry/new-york-v4/ui/button';
 import { Input } from '@/registry/new-york-v4/ui/input';
+
+import { Building2, Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
 
 const footerLinks = {
     company: [
@@ -161,9 +161,7 @@ const Footer = () => {
             {/* Bottom Bar */}
             <div className='border-t border-slate-800'>
                 <div className='mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-6 sm:flex-row sm:px-6 lg:px-8'>
-                    <p className='text-sm text-slate-500'>
-                        &copy; {currentYear} LuxeEstates. All rights reserved.
-                    </p>
+                    <p className='text-sm text-slate-500'>&copy; {currentYear} HomeX. All rights reserved.</p>
                     <div className='flex gap-6'>
                         <Link href='/privacy' className='text-sm text-slate-500 transition-colors hover:text-slate-300'>
                             Privacy Policy
