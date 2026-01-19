@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 
 import type { Metadata } from 'next';
+import { Playfair_Display } from 'next/font/google';
 import localFont from 'next/font/local';
 
 import { ThemeProvider } from 'next-themes';
@@ -19,6 +20,11 @@ const geistMono = localFont({
     variable: '--font-geist-mono',
     weight: '100 900'
 });
+const playfair = Playfair_Display({
+    subsets: ['latin'],
+    variable: '--font-playfair',
+    weight: ['400', '500', '600', '700']
+});
 
 export const metadata: Metadata = {
     title: 'HomeX - Premium Real Estate',
@@ -31,8 +37,8 @@ const Layout = ({ children }: Readonly<{ children: ReactNode }>) => {
         <html suppressHydrationWarning lang='en'>
             <body
                 suppressHydrationWarning
-                className={`${geistSans.variable} ${geistMono.variable} bg-background text-foreground overscroll-none antialiased`}>
-                <ThemeProvider attribute='class'>
+                className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} bg-white text-neutral-900 overscroll-none antialiased`}>
+                <ThemeProvider attribute='class' defaultTheme='light' enableSystem={false}>
                     <Navbar />
                     {children}
                     <Toaster />

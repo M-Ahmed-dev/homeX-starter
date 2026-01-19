@@ -1,107 +1,170 @@
-import Link from 'next/link';
+'use client';
 
-import { Button } from '@/registry/new-york-v4/ui/button';
-import { Input } from '@/registry/new-york-v4/ui/input';
+import { useEffect, useState } from 'react';
 
-import { ArrowRight, MapPin, Search } from 'lucide-react';
+import Image from 'next/image';
+
+import { motion } from 'framer-motion';
+
+const images = [
+    'https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=2070&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1545558014-8692077e9b5c?q=80&w=2070&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=2071&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1448630360428-65456885c650?q=80&w=2067&auto=format&fit=crop'
+];
+
+// Elegant letter-by-letter animation
+const AnimatedText = ({ text, delay = 0 }: { text: string; delay?: number }) => {
+    const letters = text.split('');
+
+    const container = {
+        hidden: { opacity: 1 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.04,
+                delayChildren: delay
+            }
+        }
+    };
+
+    const child = {
+        hidden: { opacity: 0, y: 15 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                type: 'spring',
+                damping: 12,
+                stiffness: 100
+            }
+        }
+    };
+
+    return (
+        <motion.span variants={container} initial='hidden' animate='visible'>
+            {letters.map((letter, index) => (
+                <motion.span key={index} variants={child as any} style={{ display: 'inline-block' }}>
+                    {letter === ' ' ? '\u00A0' : letter}
+                </motion.span>
+            ))}
+        </motion.span>
+    );
+};
 
 const HeroSection = () => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    // Auto-play carousel
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) % images.length);
+        }, 5000);
+
+        return () => clearInterval(interval);
+    }, []);
+
     return (
-        <section className='relative min-h-screen overflow-hidden'>
-            {/* Background Image */}
-            <div
-                className='absolute inset-0 bg-cover bg-center bg-no-repeat'
-                style={{
-                    backgroundImage:
-                        'url("https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop")'
-                }}
-            />
-
-            {/* Dark Overlay for better text readability */}
-            <div className='absolute inset-0 bg-slate-900/60' />
-
-            {/* Gradient Overlay */}
-            <div className='absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-slate-900/70' />
-
-            {/* Content */}
-            <div className='relative mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-center px-4 pt-16 text-center sm:px-6 lg:px-8'>
-                {/* Badge */}
-                <div className='mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-sm'>
-                    <span className='h-2 w-2 animate-pulse rounded-full bg-emerald-400' />
-                    <span className='text-sm font-medium text-white/90'>Premium Properties Available Now</span>
-                </div>
-
-                {/* Main Heading */}
-                <h1 className='mb-6 max-w-4xl text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl'>
-                    Find Your Perfect
-                    <span className='block bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200 bg-clip-text text-transparent'>
-                        Dream Home
-                    </span>
-                </h1>
-
-                {/* Subtitle */}
-                <p className='mb-10 max-w-2xl text-lg text-slate-300 sm:text-xl'>
-                    Discover exceptional properties in prime locations. From luxury apartments to stunning villas, we
-                    help you find the home that matches your lifestyle.
-                </p>
-
-                {/* Search Bar */}
-                <div className='mb-10 w-full max-w-2xl'>
-                    <div className='flex flex-col gap-3 rounded-2xl bg-white/10 p-3 backdrop-blur-md sm:flex-row'>
-                        <div className='relative flex-1'>
-                            <MapPin className='absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 text-slate-400' />
-                            <Input
-                                type='text'
-                                placeholder='Enter location, city, or neighborhood...'
-                                className='h-12 border-0 bg-white pl-10 text-slate-900 placeholder:text-slate-500 focus-visible:ring-2 focus-visible:ring-amber-400'
-                            />
-                        </div>
-                        <Button size='lg' className='h-12 bg-amber-500 px-8 text-slate-900 hover:bg-amber-400'>
-                            <Search className='mr-2 h-5 w-5' />
-                            Search
-                        </Button>
+        <section className='relative h-screen w-full overflow-hidden'>
+            {/* Blurred Background Layer */}
+            <div className='absolute inset-0'>
+                {images.map((src, index) => (
+                    <div key={src} className={`absolute inset-0 transition-opacity duration-1000`}>
+                        <Image
+                            src={src}
+                            alt=''
+                            fill
+                            className='scale-105 object-cover blur-sm'
+                            priority={index === 0}
+                        />
                     </div>
-                </div>
-
-                {/* CTA Buttons */}
-                <div className='flex flex-col gap-4 sm:flex-row'>
-                    <Button
-                        asChild
-                        size='lg'
-                        className='bg-white text-slate-900 hover:bg-slate-100'
-                        variant='secondary'>
-                        <Link href='#'>
-                            Browse Properties
-                            <ArrowRight className='ml-2 h-5 w-5' />
-                        </Link>
-                    </Button>
-                    <Button
-                        asChild
-                        size='lg'
-                        variant='outline'
-                        className='border-white/30 bg-transparent text-white hover:bg-white/10'>
-                        <Link href='#contact'>Schedule a Viewing</Link>
-                    </Button>
-                </div>
-
-                {/* Stats */}
-                <div className='mt-16 grid grid-cols-2 gap-8 sm:grid-cols-4'>
-                    {[
-                        { value: '500+', label: 'Properties' },
-                        { value: '1200+', label: 'Happy Clients' },
-                        { value: '15+', label: 'Years Experience' },
-                        { value: '50+', label: 'Expert Agents' }
-                    ].map((stat) => (
-                        <div key={stat.label} className='text-center'>
-                            <div className='text-3xl font-bold text-white sm:text-4xl'>{stat.value}</div>
-                            <div className='mt-1 text-sm text-slate-400'>{stat.label}</div>
-                        </div>
-                    ))}
-                </div>
+                ))}
+                {/* Light overlay */}
+                <div className='absolute inset-0 bg-neutral-100/40' />
             </div>
 
-            {/* Bottom Gradient */}
-            <div className='from-background absolute right-0 bottom-0 left-0 h-32 bg-gradient-to-t to-transparent' />
+            {/* Main Framed Image */}
+            <div className='absolute inset-0 flex items-center justify-center p-8 sm:p-16 lg:p-24'>
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1, ease: 'easeOut' }}
+                    className='relative h-full w-full max-w-6xl overflow-hidden rounded-md shadow-2xl'>
+                    {images.map((src, index) => (
+                        <div
+                            key={src}
+                            className={`absolute inset-0 transition-opacity duration-1000 ${
+                                index === currentIndex ? 'opacity-100' : 'opacity-0'
+                            }`}>
+                            <Image
+                                src={src}
+                                alt={`Architecture Project ${index + 1}`}
+                                fill
+                                className='object-cover'
+                                priority={index === 0}
+                            />
+                        </div>
+                    ))}
+
+                    {/* Dark gradient for text readability - bottom right focus */}
+                    <div className='pointer-events-none absolute inset-0 bg-gradient-to-tl from-black/70 via-black/20 to-transparent' />
+
+                    {/* Bottom Right Text - Inside the slider */}
+                    <motion.div
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8, delay: 0.5 }}
+                        className='absolute right-6 bottom-6 z-10 text-right sm:right-10 sm:bottom-10'>
+                        {/* Decorative line */}
+                        <motion.div
+                            initial={{ scaleX: 0 }}
+                            animate={{ scaleX: 1 }}
+                            transition={{ duration: 0.6, delay: 0.8 }}
+                            className='mb-3 ml-auto h-[1px] w-10 origin-right bg-white/50'
+                        />
+
+                        {/* Main tagline with elegant serif font */}
+                        <h1 className='font-heading text-xl leading-tight font-light tracking-wide text-white/90 italic sm:text-2xl md:text-3xl lg:text-4xl'>
+                            <AnimatedText text='Where Ideas' delay={0.6} />
+                            <br />
+                            <span className='font-semibold tracking-tight text-white not-italic'>
+                                <AnimatedText text='Take Form' delay={1.1} />
+                            </span>
+                        </h1>
+
+                        {/* Small accent line below */}
+                        <motion.div
+                            initial={{ scaleX: 0 }}
+                            animate={{ scaleX: 1 }}
+                            transition={{ duration: 0.6, delay: 1.6 }}
+                            className='mt-3 ml-auto h-[1px] w-6 origin-right bg-white/40'
+                        />
+                    </motion.div>
+
+                    {/* Subtle vignette inside frame */}
+                    <div className='pointer-events-none absolute inset-0 shadow-[inset_0_0_100px_rgba(0,0,0,0.15)]' />
+                </motion.div>
+            </div>
+
+            {/* Slide Indicators */}
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 2 }}
+                className='absolute bottom-8 left-1/2 flex -translate-x-1/2 gap-3'>
+                {images.map((_, index) => (
+                    <button
+                        key={index}
+                        onClick={() => setCurrentIndex(index)}
+                        className={`h-1.5 rounded-full transition-all duration-300 ${
+                            index === currentIndex
+                                ? 'w-8 bg-neutral-700 shadow-lg'
+                                : 'w-1.5 bg-neutral-400 hover:bg-neutral-500'
+                        }`}
+                        aria-label={`Go to slide ${index + 1}`}
+                    />
+                ))}
+            </motion.div>
         </section>
     );
 };

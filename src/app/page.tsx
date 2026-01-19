@@ -1,3 +1,4 @@
+import BrandingSection from '@/components/branding-section';
 import ContactSection from '@/components/contact-section';
 import FeaturedProperties from '@/components/featured-properties';
 import Footer from '@/components/footer';
@@ -8,6 +9,7 @@ const Page = () => {
     return (
         <main>
             <HeroSection />
+            <BrandingSection />
             <ServicesSection />
             <FeaturedProperties />
             <ContactSection />
